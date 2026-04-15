@@ -26,12 +26,14 @@ class Orchestrator:
         self.executor.register_tool(ExplainTool())
         self.executor.register_tool(WebSearchTool())
 
-    def process(self, request_id: str, content: str, input_type: str = "text") -> dict:
+    def process(self, request_id: str, content: str, input_type: str = "text", history: list[dict] | None = None) -> dict:
         """处理报告解读请求的完整流程"""
         # 1. 创建共享上下文
         context = SharedContext(request_id=request_id)
         context.set("input_type", input_type)
         context.set("user_request", content)
+        if history:
+            context.set("history", history)
 
         # 2. 规划执行计划
         plan = self.planner.run(context)

@@ -9,7 +9,7 @@ def test_qwen_client_chat():
     with patch.object(client, "_call_api", return_value='{"result": "ok"}') as mock:
         result = client.chat("qwen-plus", "hello", [])
         assert result == '{"result": "ok"}'
-        mock.assert_called_once_with("qwen-plus", "hello", [])
+        mock.assert_called_once_with("qwen-plus", "hello", [], None)
 
 
 def test_embedding_client_embed():
