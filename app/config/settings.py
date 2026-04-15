@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # LLM 配置
@@ -13,6 +16,14 @@ LLM_CONFIG = {
     "embedding": {
         "model": "text-embedding-v2",
         "dimension": 1536,
+    },
+    "deepseek": {
+        "api_key": os.getenv("DEEPSEEK_API_KEY", ""),
+        "base_url": os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+        "models": {
+            "chat": "deepseek-chat",
+            "reasoner": "deepseek-reasoner",
+        },
     },
 }
 
